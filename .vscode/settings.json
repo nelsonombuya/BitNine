@@ -1,5 +1,5 @@
 {
-    "cSpell.words": ["fibo"],
+    "cSpell.words": ["Bitnine", "fibo", "msys"],
     "files.associations": {
         "*.embeddedhtml": "html",
         "type_traits": "c"
