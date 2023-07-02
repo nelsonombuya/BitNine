@@ -5,30 +5,32 @@
 #include <stdlib.h>
 
 typedef struct Node Node;
+typedef struct NodeValue NodeValue;
 
 typedef enum
 {
     ADD,
     MUL,
     SUB,
-    DIV
+    DIV,
+    FIB
 } TypeTag;
 
-typedef struct
+struct NodeValue
 {
     int value;
     Node *node;
-} nodeValue;
+};
 
 struct Node
 {
     TypeTag type;
-    nodeValue left;
-    nodeValue right;
+    NodeValue left;
+    NodeValue right;
 };
 
 int calc(Node *node);
 int fibonacci(int n);
-Node *makeFunc(TypeTag type, nodeValue v1, nodeValue v2);
+Node *makeFunc(TypeTag type, NodeValue v1, NodeValue v2);
 
 #endif /* NODE_H */

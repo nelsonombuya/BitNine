@@ -1,6 +1,6 @@
 #include "node.h"
 
-Node *makeFunc(TypeTag type, nodeValue v1, nodeValue v2)
+Node *makeFunc(TypeTag type, NodeValue v1, NodeValue v2)
 {
 	Node *newNode = (Node *)malloc(sizeof(Node));
 	newNode->type = type;
@@ -28,13 +28,10 @@ int calc(Node *node)
 	if (node == NULL)
 		return 0;
 
-	if (!node->left.value)
+	if (node->left.node != NULL && !node->left.value)
 		node->left.value = calc(node->left.node);
 
-	if (node->left.value && !node->right.value && !node->right.node)
-		return fibonacci(node->left.value);
-
-	if (!node->right.value)
+	if (node->right.node != NULL && !node->right.value)
 		node->right.value = calc(node->right.node);
 
 	switch (node->type)
@@ -47,6 +44,8 @@ int calc(Node *node)
 		return node->left.value - node->right.value;
 	case DIV:
 		return node->left.value / node->right.value;
+	case FIB:
+		return fibonacci(node->left.value);
 	default:
 		return 0;
 	}
@@ -54,7 +53,7 @@ int calc(Node *node)
 
 int main()
 {
-	nodeValue value1, value2;
+	NodeValue value1, value2;
 
 	value1.value = 10;
 	value2.value = 6;
@@ -64,21 +63,22 @@ int main()
 	value2.value = 4;
 	Node *mul = makeFunc(MUL, value1, value2);
 
-	value1.value = NULL;
-	value2.value = NULL;
+	value1.value = 0;
+	value2.value = 0;
 	value1.node = mul;
 	value2.node = add;
 	Node *sub = makeFunc(SUB, value1, value2);
 
-	value1.value = NULL;
-	value2.value = NULL;
+	value1.value = 0;
+	value2.value = 0;
 	value1.node = sub;
 	value2.node = NULL;
-	Node *fib = makeFunc(SUB, value1, NULL);
+	Node *fib = makeFunc(FIB, value1, value2);
 
 	printf("add: %d\n", calc(add));
 	printf("mul: %d\n", calc(mul));
 	printf("sub: %d\n", calc(sub));
+	printf("fib: %d\n", calc(fib));
 
 	return (0);
 }
