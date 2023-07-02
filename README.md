@@ -69,7 +69,7 @@ gcc node.c -o node
 add: 16
 mul: 20
 sub: 4
-fib: 8
+fib: 3
 ```
 
 ### **Congratulations!**
