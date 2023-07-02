@@ -1,0 +1,7 @@
+{
+    "cSpell.words": ["fibo"],
+    "files.associations": {
+        "*.embeddedhtml": "html",
+        "type_traits": "c"
+    }
+}
