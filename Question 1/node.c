@@ -1,4 +1,21 @@
 #include "node.h"
+#define MAX_N 1000
+int fib[MAX_N];
+
+int fibonacci(int n)
+{
+	if (fib[n] != -1)
+		return fib[n];
+
+	if (n == 0)
+		return 0;
+	if (n == 1)
+		return 1;
+
+	fib[n] = fibonacci(n - 1) + fibonacci(n - 2);
+
+	return fib[n];
+}
 
 Node *makeFunc(TypeTag type, NodeValue v1, NodeValue v2)
 {
@@ -7,20 +24,6 @@ Node *makeFunc(TypeTag type, NodeValue v1, NodeValue v2)
 	newNode->left = v1;
 	newNode->right = v2;
 	return newNode;
-}
-
-int fibonacci(int n)
-{
-	int fib[n + 1];
-	fib[0] = 0;
-	fib[1] = 1;
-
-	for (int i = 2; i <= n; i++)
-	{
-		fib[i] = fib[i - 1] + fib[i - 2];
-	}
-
-	return fib[n];
 }
 
 int calc(Node *node)
@@ -53,6 +56,10 @@ int calc(Node *node)
 
 int main()
 {
+	/* Initialize memoization table with -1 */
+	for (int i = 0; i < MAX_N; i++)
+		fib[i] = -1;
+
 	NodeValue value1, value2;
 
 	value1.value = 10;
