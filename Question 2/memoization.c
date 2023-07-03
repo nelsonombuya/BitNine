@@ -2,6 +2,13 @@
 #define MAX_SIZE 1000
 int memo[MAX_SIZE];
 
+void initializeTable()
+{
+	/* Initialize memoization table with -1 */
+	for (int i = 0; i < MAX_SIZE; i++)
+		memo[i] = -1;
+}
+
 int F_memoization(int n)
 {
 	if (n == 0)
@@ -20,18 +27,16 @@ int F_memoization(int n)
 
 int main()
 {
-	/* Initialize memoization table with -1 */
-	for (int i = 0; i < MAX_SIZE; i++)
-		memo[i] = -1;
+	initializeTable();
 
 	while (1)
 	{
 		int n;
 
-		printf("Enter the value of n (Input -1 to exit): ");
+		printf("Enter the value of n (Input a number less than 0 to exit): ");
 		scanf("%d", &n);
 
-		if (n == -1)
+		if (n < 0)
 			break;
 
 		int result = F_memoization(n);
